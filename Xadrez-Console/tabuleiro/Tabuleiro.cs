@@ -13,9 +13,9 @@
             Pecas = new Peca[linhas, colunas];
         }
 
-        public Peca Peca(int linhas, int coluna)
+        public Peca Peca(int linha, int coluna)
         {
-            return Pecas[linhas, coluna];
+            return Pecas[linha, coluna];
         }
 
         public Peca Peca(Posicao pos)
@@ -53,7 +53,7 @@
 
         public bool PosicaoValida(Posicao pos)
         {
-            if (pos.Linha < 0 || pos.Linha >= Linhas|| pos.Coluna <0 || pos.Coluna >= Colunas) 
+            if (pos.Linha < 0 || pos.Linha >= Linhas|| pos.Coluna < 0 || pos.Coluna >= Colunas) 
             {
                 return false;
             }

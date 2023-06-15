@@ -1,4 +1,6 @@
-﻿namespace tabuleiro
+﻿using xadrez;
+
+namespace tabuleiro
 {
     internal class Posicao
     {
@@ -11,5 +13,7 @@
             Linha = linha;
             Coluna = coluna;
         }
+
+
     }
 }
