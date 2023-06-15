@@ -7,10 +7,21 @@ namespace xadrezConsole
     {
         static void Main(string[] args)
         {
-            Tabuleiro tab = new Tabuleiro(8, 8);
-            tab.ColocarPeca(new Torre (tab, Cor.Branca), new Posicao(0, 2));
-            tab.ColocarPeca(new Bispo(tab, Cor.Preta), new Posicao(7, 6));
-            Tela.ImprimirTab(tab);
+            PartidaXadrez partida = new PartidaXadrez();
+            while(!partida.Terminada)
+            {
+                Console.Clear();
+                Tela.ImprimirTab(partida.Tab);
+
+                Console.WriteLine();
+                Console.Write("Origem: ");
+                Posicao origem = Tela.LerPosicaoXadrez().ConverterPosicao();
+                Console.Write("Destino: ");
+                Posicao destino = Tela.LerPosicaoXadrez().ConverterPosicao();
+
+                partida.MoverPeca(origem, destino);
+            }
+
 
         }
     }
