@@ -37,7 +37,8 @@ namespace xadrezConsole
                     Console.ReadLine();
                 }
             }
-
+            Console.Clear();
+            Tela.ImprimirPartida(partida);
 
         }
     }

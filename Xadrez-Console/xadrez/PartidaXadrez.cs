@@ -65,8 +65,16 @@ namespace xadrez
             {
                 Xeque = false;
             }
-            Turno++;
-            MudarJogador();
+
+            if (EstaEmXequemate(Adversaria(JogadorAtual))) 
+            {
+                Terminada = true;
+            }
+            else
+            {
+                Turno++;
+                MudarJogador();
+            }
         }
 
         public void ValidarPosicaoOrigem(Posicao origem)
@@ -87,7 +95,7 @@ namespace xadrez
 
         public void ValidarPosicaoDestino(Posicao origem, Posicao destino)
         {
-            if (!Tab.Peca(origem).PodeMoverPara(destino))
+            if (!Tab.Peca(origem).MovimentoPossivel(destino))
             {
                 throw new TabuleiroException("Posição de destino inválida!");
             }
@@ -184,6 +192,37 @@ namespace xadrez
                 }
             }
             return false;
+        }
+
+        public bool EstaEmXequemate(Cor cor)
+        {
+            if(!EstaEmXeque(cor))
+            {
+                return false;
+            }
+            foreach(Peca p in PecasEmJogo(cor))
+            {
+                bool[,] mat = p.MovimentosPossiveis();
+                for (int i = 0; i < Tab.Linhas; i++)
+                {
+                    for(int j = 0; j < Tab.Colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao origem = p.Posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = MoverPeca(origem, destino);
+                            bool testeXeque = EstaEmXeque(cor);
+                            DesfazerMovimento(origem, destino, pecaCapturada);
+                            if(!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         private void MudarJogador()
