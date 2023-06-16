@@ -22,12 +22,47 @@ namespace xadrez
             bool[,] mat = new bool[Tab.Linhas, Tab.Colunas];
             Posicao pos = new Posicao(0, 0);
 
-            pos = new Posicao(Posicao.Linha - 1, Posicao.Coluna);
+
+            pos = new Posicao(Posicao.Linha - 2, Posicao.Coluna - 1);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
-
+            pos = new Posicao(Posicao.Linha - 2, Posicao.Coluna + 1);
+            if (Tab.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos = new Posicao(Posicao.Linha - 1, Posicao.Coluna + 2);
+            if (Tab.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos = new Posicao(Posicao.Linha + 1, Posicao.Coluna + 2);
+            if (Tab.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos = new Posicao(Posicao.Linha + 2, Posicao.Coluna + 1);
+            if (Tab.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos = new Posicao(Posicao.Linha + 2, Posicao.Coluna -1);
+            if (Tab.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos = new Posicao(Posicao.Linha + 1, Posicao.Coluna - 2);
+            if (Tab.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos = new Posicao(Posicao.Linha - 1, Posicao.Coluna - 2);
+            if (Tab.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
             return mat;
         }
     }
