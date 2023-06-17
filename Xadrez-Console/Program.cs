@@ -19,6 +19,7 @@ namespace xadrezConsole
                     Console.WriteLine();
                     Console.Write("Origem: ");
                     Posicao origem = Tela.LerPosicaoXadrez().ConverterPosicao();
+                    partida.ValidarSePosicaoExiste(origem);
                     partida.ValidarPosicaoOrigem(origem);
                     bool[,] posicoesPossiveis = partida.Tab.Peca(origem).MovimentosPossiveis();
                     Console.Clear();
@@ -27,13 +28,36 @@ namespace xadrezConsole
                     Console.WriteLine();
                     Console.Write("Destino: ");
                     Posicao destino = Tela.LerPosicaoXadrez().ConverterPosicao();
+                    partida.ValidarSePosicaoExiste(destino);
                     partida.ValidarPosicaoDestino(origem, destino);
+                    partida.VerificarPromocao(origem, destino);
+                    if(partida.Promocao)
+                    {
+                        if (partida.Promocao)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("1 - Rainha");
+                            Console.WriteLine("2 - Torre");
+                            Console.WriteLine("3 - Bispo");
+                            Console.WriteLine("4 - Cavalo");
+                            Console.Write("O seu peão será promovido para: ");
+                            int promocao = int.Parse(Console.ReadLine());
+                            partida.RealizarJogada(origem, destino, promocao);
 
-                    partida.RealizarJogada(origem, destino);
+                        }
+                    }
+                    else
+                    {
+                        partida.RealizarJogada(origem, destino);
+                    }
+
                 }
                 catch(TabuleiroException e)
                 {
                     Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+                catch(Exception e) {
                     Console.ReadLine();
                 }
             }
